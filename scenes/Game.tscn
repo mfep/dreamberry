@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://scripts/TileMapGenerator.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 16.0
+radius = 14.0
 height = 0.0
 
 [node name="Game" type="Node" index="0"]
@@ -31,11 +32,42 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( -655359, 0, 0, -655358, 0, 0, -655357, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 0, 0, -589817, 0, 0, -589816, 0, 0, -589806, 0, 0, -589805, 0, 0, -589804, 0, 0, -589803, 0, 0, -524279, 0, 0, -524278, 0, 0, -524271, 0, 0, -524266, 0, 0, -458741, 0, 0, -458736, 0, 0, -458735, 0, 0, -458729, 0, 0, -393204, 0, 0, -393201, 0, 0, -327667, 0, 0, -327665, 0, 0, -262130, 0, 0, -262129, 0, 0, -196608, 5, 0, -196594, 5, 0, -131072, 5, 0, -131066, 5, 0, -131058, 5, 0, -65536, 5, 0, -65535, 5, 0, -65534, 5, 0, -65533, 5, 0, -65532, 5, 0, -65531, 5, 0, -65530, 5, 0, -65529, 5, 0, -65528, 5, 0, -65527, 5, 0, -65526, 5, 0, -65525, 5, 0, -65524, 5, 0, -65523, 5, 0, -65522, 5, 0 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Cell" ]
+Map_Width = 30
+Map_Height = 60
+Platforms_Per_Level = 4
+Min_Offset = 3
+Max_Offset = 5
+Min_Platform_Length = 2
+Max_Platform_Length = 8
 
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
+[node name="Player" type="KinematicBody2D" parent="." index="1"]
 
-position = Vector2( 480, -256 )
+position = Vector2( 96, -208 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 3 )
+Acceleration = 40.0
+Max_Speed = 250.0
+Jump_Height = 144.0
+Jump_Time = 0.25
+
+[node name="icon" type="Sprite" parent="Player" index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="1"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="Player" index="2"]
+
 anchor_mode = 1
 rotating = false
 current = true
@@ -58,29 +90,6 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-
-[node name="Player" type="KinematicBody2D" parent="." index="2"]
-
-position = Vector2( 96, -208 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 2 )
-Acceleration = 40.0
-Max_Speed = 250.0
-Jump_Height = 64.0
-Jump_Time = 0.25
-
-[node name="icon" type="Sprite" parent="Player" index="0"]
-
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="1"]
-
-shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 

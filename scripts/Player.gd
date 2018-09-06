@@ -21,7 +21,7 @@ func _physics_process(delta):
 	
 	var desired_vel_x = input_x*Max_Speed
 	var accelerate_dir = sign(desired_vel_x - velocity.x)
-	var new_vel_x = clamp(velocity.x + accelerate_dir*Acceleration*delta*60, -Max_Speed, Max_Speed)
+	var new_vel_x = clamp(velocity.x + accelerate_dir*Acceleration, -Max_Speed, Max_Speed)
 	
 	# remove scattering
 	if ((velocity.x - desired_vel_x)*(new_vel_x - desired_vel_x) < 0):
