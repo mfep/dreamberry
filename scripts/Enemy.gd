@@ -3,6 +3,7 @@ extends Area2D
 export(float) var Speed
 export(float) var Min_Change_Time
 export(float) var Max_Change_Time
+export(float) var Dps
 
 var direction_x = 0
 var size = Vector2(32, 32)
@@ -16,6 +17,16 @@ func _ready():
 	new_next_change()
 
 func _process(delta):
+	# collision with bullets
+	for area in get_overlapping_areas():
+		if area.name == 'Bullet':
+			queue_free()
+			area.queue_free()
+	# collision with player
+	var player = $'../../Player'
+	if overlaps_body(player):
+		player.change_health(-Dps*delta)
+
 	# update change
 	next_change -= delta
 	if next_change < 0:

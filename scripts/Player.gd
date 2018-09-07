@@ -5,6 +5,9 @@ export(float) var Max_Speed
 export(float) var Jump_Height
 export(float) var Jump_Time
 export(float) var Shoot_Interval
+export(float) var Max_Health
+
+signal Health_Changed(new_health)
 
 var velocity = Vector2()
 var gravity = 0
@@ -12,6 +15,7 @@ var jump_velocity = 0
 var start_pos = Vector2()
 var shoot_time = 0
 var facing_dir = 1
+var current_health = 0
 
 var bullett_scene = preload('res://scenes/Bullet.tscn')
 
@@ -28,6 +32,7 @@ func _ready():
 	start_pos = position
 	gravity = -2*Jump_Height/Jump_Time/Jump_Time
 	jump_velocity = abs(gravity)*Jump_Time
+	change_health(Max_Health)
 	#print('gravity:', gravity, ' jump velocity:', jump_velocity)
 
 func _process(delta):
@@ -60,3 +65,7 @@ func _physics_process(delta):
 func _input(event):
 	if (get_node('/root/global').DEBUG and event.is_action_pressed('ui_focus_next')):
 		position = start_pos
+
+func change_health(amount):
+	current_health += amount
+	emit_signal('Health_Changed', current_health)
