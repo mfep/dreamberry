@@ -9,6 +9,9 @@ export(int) var Min_Platform_Length
 export(int) var Max_Platform_Length
 export(int) var Ground_Rows
 
+signal map_generated(spawn_points)
+var spawn_points = []
+
 func random_int_range(_min, _max):
 	return _min + (randi() % (_max - _min + 1))
 
@@ -31,6 +34,7 @@ func do_blocks_pass():
 			var end_col = min(Map_Width - 2, start_col + random_int_range(Min_Platform_Length, Max_Platform_Length))
 			for col in range(start_col, end_col + 1):
 				set_cell(col, -level_idx, 0)
+				spawn_points.append(map_to_world(Vector2(col, -level_idx)) + Vector2(cell_size.x/2, -cell_size.y/2))
 		level_idx += Min_Offset + (randi() % (Max_Offset - Min_Offset))
 
 	# clear player pos
@@ -84,6 +88,7 @@ func generate():
 	clear()
 	do_blocks_pass()
 	do_autotile_pass()
+	emit_signal('map_generated', spawn_points)
 
 func _ready():
 	randomize()

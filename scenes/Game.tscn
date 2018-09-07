@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://scripts/TileMapGenerator.gd" type="Script" id=2]
-[ext_resource path="res://scripts/Player.gd" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://scripts/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://scripts/TileMapGenerator.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -13,10 +14,15 @@ height = 0.0
 
 [node name="Game" type="Node" index="0"]
 
-[node name="TileMap" type="TileMap" parent="." index="0"]
+[node name="Spawner" type="Node" parent="." index="0"]
+
+script = ExtResource( 1 )
+Number_Enemies = 40
+
+[node name="TileMap" type="TileMap" parent="." index="1"]
 
 mode = 0
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -32,7 +38,7 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 _sections_unfolded = [ "Cell" ]
 Map_Width = 30
 Map_Height = 60
@@ -43,14 +49,15 @@ Min_Platform_Length = 2
 Max_Platform_Length = 8
 Ground_Rows = 2
 
-[node name="Player" type="KinematicBody2D" parent="." index="1"]
+[node name="Player" type="KinematicBody2D" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 48, -48 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 Acceleration = 40.0
 Max_Speed = 250.0
@@ -60,7 +67,7 @@ Jump_Time = 0.25
 [node name="icon" type="Sprite" parent="Player" index="0"]
 
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
@@ -102,5 +109,7 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[connection signal="map_generated" from="TileMap" to="Spawner" method="_on_TileMap_map_generated"]
 
 

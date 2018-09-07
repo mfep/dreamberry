@@ -10,6 +10,14 @@ var gravity = 0
 var jump_velocity = 0
 var start_pos = Vector2()
 
+func get_input():
+	var x = 0
+	var jump = 0
+	if (Input.is_action_pressed('ui_left')): x += -1
+	if (Input.is_action_pressed('ui_right')): x += 1
+	if (Input.is_action_just_pressed('ui_accept') and is_on_floor()): jump = 1
+	return [x, jump]
+	
 func _ready():
 	start_pos = position
 	gravity = -2*Jump_Height/Jump_Time/Jump_Time
@@ -17,10 +25,9 @@ func _ready():
 	print('gravity:', gravity, ' jump velocity:', jump_velocity)
 
 func _physics_process(delta):
-	var input_x = 0
-	if (Input.is_action_pressed('ui_left')): input_x += -1
-	if (Input.is_action_pressed('ui_right')): input_x += 1
-	
+	var input = get_input()
+	var input_x = input[0]
+	var jump = input[1]
 	var desired_vel_x = input_x*Max_Speed
 	var accelerate_dir = sign(desired_vel_x - velocity.x)
 	var new_vel_x = clamp(velocity.x + accelerate_dir*Acceleration, -Max_Speed, Max_Speed)
@@ -33,9 +40,7 @@ func _physics_process(delta):
 		new_vel_x = 0
 
 	# jumping
-	var jump = 0
-	if (Input.is_action_just_pressed('ui_accept') and is_on_floor()):
-		jump = 1
+
 	var new_vel_y = velocity.y - gravity*delta - jump*jump_velocity
 	velocity = move_and_slide(Vector2(new_vel_x, new_vel_y), Vector2(0, -1))
 
