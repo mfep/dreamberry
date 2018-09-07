@@ -4,11 +4,16 @@ export(float) var Acceleration
 export(float) var Max_Speed
 export(float) var Jump_Height
 export(float) var Jump_Time
+export(float) var Shoot_Interval
 
 var velocity = Vector2()
 var gravity = 0
 var jump_velocity = 0
 var start_pos = Vector2()
+var shoot_time = 0
+var facing_dir = 1
+
+var bullett_scene = preload('res://scenes/Bullet.tscn')
 
 func get_input():
 	var x = 0
@@ -16,13 +21,23 @@ func get_input():
 	if (Input.is_action_pressed('ui_left')): x += -1
 	if (Input.is_action_pressed('ui_right')): x += 1
 	if (Input.is_action_just_pressed('ui_up') and is_on_floor()): jump = 1
+	if x != 0: facing_dir = x
 	return [x, jump]
 	
 func _ready():
 	start_pos = position
 	gravity = -2*Jump_Height/Jump_Time/Jump_Time
 	jump_velocity = abs(gravity)*Jump_Time
-	print('gravity:', gravity, ' jump velocity:', jump_velocity)
+	#print('gravity:', gravity, ' jump velocity:', jump_velocity)
+
+func _process(delta):
+	shoot_time -= delta
+	if Input.is_action_pressed('ui_accept') and shoot_time < 0:
+		shoot_time = Shoot_Interval
+		var bullett_node = bullett_scene.instance()
+		bullett_node.position = position
+		bullett_node.direction = facing_dir
+		get_parent().add_child(bullett_node)
 
 func _physics_process(delta):
 	var input = get_input()
@@ -38,8 +53,6 @@ func _physics_process(delta):
 	# snappy
 	if (new_vel_x*desired_vel_x < 0):
 		new_vel_x = 0
-
-	# jumping
 
 	var new_vel_y = velocity.y - gravity*delta - jump*jump_velocity
 	velocity = move_and_slide(Vector2(new_vel_x, new_vel_y), Vector2(0, -1))

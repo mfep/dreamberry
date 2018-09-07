@@ -10,15 +10,16 @@ extents = Vector2( 14, 14 )
 
 [node name="Enemy" type="Area2D"]
 
-input_pickable = true
+input_pickable = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+monitorable = false
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 Speed = 100.0
 Min_Change_Time = 1.0
 Max_Change_Time = 5.0
