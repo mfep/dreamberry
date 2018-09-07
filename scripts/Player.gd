@@ -15,7 +15,7 @@ func get_input():
 	var jump = 0
 	if (Input.is_action_pressed('ui_left')): x += -1
 	if (Input.is_action_pressed('ui_right')): x += 1
-	if (Input.is_action_just_pressed('ui_accept') and is_on_floor()): jump = 1
+	if (Input.is_action_just_pressed('ui_up') and is_on_floor()): jump = 1
 	return [x, jump]
 	
 func _ready():

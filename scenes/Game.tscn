@@ -40,7 +40,7 @@ format = 1
 tile_data = PoolIntArray(  )
 script = ExtResource( 3 )
 _sections_unfolded = [ "Cell" ]
-Map_Width = 30
+Map_Width = 32
 Map_Height = 60
 Platforms_Per_Level = 4
 Min_Offset = 3
@@ -51,7 +51,6 @@ Ground_Rows = 2
 
 [node name="Player" type="KinematicBody2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( 48, -48 )
 input_pickable = false
 collision_layer = 1
@@ -87,15 +86,15 @@ anchor_mode = 1
 rotating = false
 current = true
 zoom = Vector2( 1, 1 )
-limit_left = -10000000
+limit_left = 0
 limit_top = -10000000
-limit_right = 10000000
+limit_right = 1024
 limit_bottom = 10000000
 limit_smoothed = false
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
+smoothing_enabled = true
+smoothing_speed = 10.0
 offset_v = 0.0
 offset_h = 0.0
 drag_margin_left = 0.2
@@ -105,7 +104,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Limit", "Smoothing", "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
