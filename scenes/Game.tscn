@@ -62,7 +62,7 @@ _sections_unfolded = [ "Transform" ]
 Acceleration = 40.0
 Max_Speed = 250.0
 Jump_Height = 144.0
-Jump_Time = 0.25
+Jump_Time = 0.3
 
 [node name="icon" type="Sprite" parent="Player" index="0"]
 

@@ -86,6 +86,7 @@ func do_autotile_pass():
 
 func generate():
 	clear()
+	spawn_points.clear()
 	do_blocks_pass()
 	do_autotile_pass()
 	emit_signal('map_generated', spawn_points)
