@@ -9,6 +9,8 @@ export(float) var Max_Health
 
 signal Health_Changed(new_health)
 
+var dust_scene = preload('res://scenes/DustParticles.tscn')
+
 var velocity = Vector2()
 var gravity = 0
 var jump_velocity = 0
@@ -25,7 +27,19 @@ func get_input():
 	if (Input.is_action_pressed('ui_left')): x += -1
 	if (Input.is_action_pressed('ui_right')): x += 1
 	if (Input.is_action_just_pressed('ui_up') and is_on_floor()): jump = 1
-	if x != 0: facing_dir = x
+	if x != 0:
+		facing_dir = x
+		$AnimatedSprite.flip_h = false if x > 0 else true
+		$AnimatedSprite.animation = 'run'
+	else:
+		$AnimatedSprite.animation = 'idle'
+	if not is_on_floor():
+		$AnimatedSprite.animation = 'jump'
+	if jump:
+		var dust_node = dust_scene.instance()
+		dust_node.position = position + Vector2(0, 16)
+		$'..'.add_child(dust_node)
+		dust_node.restart()
 	return [x, jump]
 	
 func _ready():

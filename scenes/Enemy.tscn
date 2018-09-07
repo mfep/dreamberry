@@ -1,12 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/enemy_atlas/enemy_run0.tres" type="Texture" id=2]
+[ext_resource path="res://sprites/enemy_atlas/enemy_run1.tres" type="Texture" id=3]
+[ext_resource path="res://sprites/enemy_atlas/enemy_run2.tres" type="Texture" id=4]
+[ext_resource path="res://sprites/enemy_atlas/enemy_run3.tres" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 14, 14 )
+extents = Vector2( 10.8748, 18.6291 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
 
 [node name="Enemy" type="Area2D"]
 
@@ -25,22 +37,18 @@ Min_Change_Time = 1.0
 Max_Change_Time = 5.0
 Dps = 1.0
 
-[node name="Graphic" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Material", "Region", "Transform", "Visibility" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+position = Vector2( 0, -5.00687 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+
+position = Vector2( 0, -5.00687 )
+frames = SubResource( 2 )
+animation = "default"
+frame = 3
+playing = true
 
 

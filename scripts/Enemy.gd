@@ -5,6 +5,8 @@ export(float) var Min_Change_Time
 export(float) var Max_Change_Time
 export(float) var Dps
 
+var explosion_scene = preload('res://scenes/Explosion.tscn')
+
 var direction_x = 0
 var size = Vector2(32, 32)
 var next_change = 0
@@ -20,6 +22,10 @@ func _process(delta):
 	# collision with bullets
 	for area in get_overlapping_areas():
 		if area.name == 'Bullet':
+			var explosion_node = explosion_scene.instance()
+			explosion_node.position = position
+			$'..'.add_child(explosion_node)
+			explosion_node.restart()
 			queue_free()
 			area.queue_free()
 	# collision with player
@@ -44,4 +50,5 @@ func _process(delta):
 		tile = tilemap.world_to_map(check_pos)
 		if tilemap.get_cellv(tile) == -1:
 			direction_x *= -1
+	$AnimatedSprite.flip_h = direction_x < 0
 	translate(Vector2(direction_x, 0)*Speed*delta)
