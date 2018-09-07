@@ -7,29 +7,34 @@ export(int) var Min_Offset
 export(int) var Max_Offset
 export(int) var Min_Platform_Length
 export(int) var Max_Platform_Length
+export(int) var Ground_Rows
 
-const GROUND_ROWS = 3
+func random_int_range(_min, _max):
+	return _min + (randi() % (_max - _min + 1))
 
 func do_blocks_pass():
 	# ground
-	for row in range(GROUND_ROWS):
+	for row in range(Ground_Rows):
 		for col in range(Map_Width):
-			set_cell(col, -row, 1)
+			set_cell(col, -row, 0)
 
 	# side walls
-	for row in range(GROUND_ROWS, Map_Height):
-		set_cell(0, -row, 1)
-		set_cell(Map_Width - 1, -row, 1)
+	for row in range(Ground_Rows, Map_Height):
+		set_cell(0, -row, 0)
+		set_cell(Map_Width - 1, -row, 0)
 
 	# platforms
-	var levelIdx = GROUND_ROWS
-	while (levelIdx < Map_Height - Max_Offset):
-		for platformIdx in range(Platforms_Per_Level):
-			var start_col = randi() % (Map_Width - Max_Platform_Length)
-			var end_col = Min_Platform_Length + start_col + (randi() % (Max_Platform_Length - Min_Platform_Length))
+	var level_idx = Ground_Rows
+	while (level_idx < Map_Height - Max_Offset):
+		for platform_idx in range(Platforms_Per_Level):
+			var start_col = random_int_range(1, Map_Width - 1)
+			var end_col = min(Map_Width - 2, start_col + random_int_range(Min_Platform_Length, Max_Platform_Length))
 			for col in range(start_col, end_col + 1):
-				set_cell(col, -levelIdx, 1)
-		levelIdx += Min_Offset + (randi() % (Max_Offset - Min_Offset))
+				set_cell(col, -level_idx, 0)
+		level_idx += Min_Offset + (randi() % (Max_Offset - Min_Offset))
+
+	# clear player pos
+	set_cell(1, -Ground_Rows, -1)
 
 func _ready():
 	randomize()
@@ -37,6 +42,6 @@ func _ready():
 	do_blocks_pass()
 
 func _input(event):
-	if (event.is_action_pressed('ui_focus_next')):
+	if (get_node('/root/global').DEBUG and event.is_action_pressed('ui_focus_next')):
 		clear()
 		do_blocks_pass()

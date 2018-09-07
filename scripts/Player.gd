@@ -8,8 +8,10 @@ export(float) var Jump_Time
 var velocity = Vector2()
 var gravity = 0
 var jump_velocity = 0
+var start_pos = Vector2()
 
 func _ready():
+	start_pos = position
 	gravity = -2*Jump_Height/Jump_Time/Jump_Time
 	jump_velocity = abs(gravity)*Jump_Time
 	print('gravity:', gravity, ' jump velocity:', jump_velocity)
@@ -36,3 +38,7 @@ func _physics_process(delta):
 		jump = 1
 	var new_vel_y = velocity.y - gravity*delta - jump*jump_velocity
 	velocity = move_and_slide(Vector2(new_vel_x, new_vel_y), Vector2(0, -1))
+
+func _input(event):
+	if (get_node('/root/global').DEBUG and event.is_action_pressed('ui_focus_next')):
+		position = start_pos
