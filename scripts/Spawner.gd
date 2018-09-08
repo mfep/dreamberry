@@ -1,12 +1,19 @@
 extends Node
 
 export(int) var Number_Enemies
+export(int) var Number_Pickups
 
 var enemy_scene = preload('res://scenes/Enemy.tscn')
+var pickup_scene = preload('res://scenes/Pickup.tscn')
 
 func _on_TileMap_map_generated(spawn_points):
 	for child in get_children():
 		child.queue_free()
+	for i in range(Number_Pickups):
+		var pickup_node = pickup_scene.instance()
+		pickup_node.position = spawn_points[randi(spawn_points) % spawn_points.size()]
+		pickup_node.connect('Picked', $'../UI', '_on_Pickup')
+		add_child(pickup_node)
 	for i in range(Number_Enemies):
 		var enemy_node = enemy_scene.instance()
 		enemy_node.connect('Killed', $'../UI', '_on_enemy_killed')

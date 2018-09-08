@@ -85,13 +85,13 @@ tracks/0/keys = {
 "values": [ Vector2( 1.6, 1.6 ), Vector2( 1, 1 ) ]
 }
 
-[node name="Game" type="Node"]
+[node name="MainScene" type="Node" index="0"]
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
-position = Vector2( 0, -1000 )
+position = Vector2( 0, -1200 )
 rotation = 1.5708
-scale = Vector2( 1, 1200 )
+scale = Vector2( 1.2, 1200 )
 texture = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -99,6 +99,7 @@ _sections_unfolded = [ "Transform" ]
 
 script = ExtResource( 1 )
 Number_Enemies = 40
+Number_Pickups = 30
 
 [node name="TileMap" type="TileMap" parent="." index="2"]
 
@@ -132,13 +133,16 @@ Ground_Rows = 2
 
 [node name="Player" type="KinematicBody2D" parent="." index="3"]
 
-position = Vector2( 48, -48 )
+position = Vector2( 46.8026, -70.752 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 Acceleration = 40.0
 Max_Speed = 250.0
 Jump_Height = 144.0
@@ -184,7 +188,7 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="." index="4"]
@@ -196,6 +200,7 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 20 )
 Enemy_Kill_Score = 100
+Pickup_Score = 50
 Double_Jump_Penalty = 150
 
 [node name="ScoreLabel" type="Label" parent="UI" index="0"]
@@ -215,13 +220,16 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
 text = "0"
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "custom_colors", "custom_constants" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/ScoreLabel" index="0"]
 

@@ -1,17 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Bullet.gd" type="Script" id=1]
-[ext_resource path="res://sprites/projectile1.tres" type="Texture" id=2]
-[ext_resource path="res://sprites/projectile2.tres" type="Texture" id=3]
-
-[sub_resource type="SpriteFrames" id=5]
-
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "default",
-"speed": 12.0
-} ]
+[ext_resource path="res://sprites/projectile_sprite_anim.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://sprites/projectile1.tres" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=7]
 
@@ -66,19 +57,22 @@ _sections_unfolded = [ "Color" ]
 [node name="Bullet" type="Node2D"]
 
 script = ExtResource( 1 )
-Speed = 500.0
+Speed = 800.0
 Max_Distance = 300.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
+modulate = Color( 1, 0.9375, 0, 1 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 5 )
+frames = ExtResource( 2 )
 animation = "default"
+frame = 1
 playing = true
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Particles2D" type="Particles2D" parent="." index="1"]
+[node name="Particles2D" type="Particles2D" parent="AnimatedSprite" index="0"]
 
+scale = Vector2( 0.5, 0.5 )
 emitting = true
 amount = 8
 lifetime = 0.2
@@ -93,7 +87,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 4 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 normal_map = null
 h_frames = 1
 v_frames = 1
