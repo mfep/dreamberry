@@ -14,20 +14,18 @@ var next_change = 0
 func new_next_change():
 	next_change = Min_Change_Time + randf() * (Max_Change_Time - Min_Change_Time)
 
+func hit_by_bullet():
+	var explosion_node = explosion_scene.instance()
+	explosion_node.position = position
+	$'..'.add_child(explosion_node)
+	explosion_node.restart()
+	queue_free()
+
 func _ready():
 	direction_x = -1 if randi() % 2 else 1
 	new_next_change()
 
 func _process(delta):
-	# collision with bullets
-	for area in get_overlapping_areas():
-		if area.name == 'Bullet':
-			var explosion_node = explosion_scene.instance()
-			explosion_node.position = position
-			$'..'.add_child(explosion_node)
-			explosion_node.restart()
-			queue_free()
-			area.queue_free()
 	# collision with player
 	var player = $'../../Player'
 	if overlaps_body(player):
