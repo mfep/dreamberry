@@ -1,7 +1,7 @@
 extends Node2D
 
-export(float) var Speed;
-export(float) var Max_Distance;
+export(float) var Speed
+export(float) var Max_Distance
 
 var direction = 0
 var distance = 0

@@ -5,9 +5,8 @@ export(float) var Max_Speed
 export(float) var Jump_Height
 export(float) var Jump_Time
 export(float) var Shoot_Interval
-export(float) var Max_Health
 
-signal Health_Changed(new_health)
+signal Double_Jumped
 
 var dust_scene = preload('res://scenes/DustParticles.tscn')
 
@@ -18,15 +17,23 @@ var start_pos = Vector2()
 var shoot_time = 0
 var facing_dir = 1
 var current_health = 0
+var jumped = false
 
 var bullett_scene = preload('res://scenes/Bullet.tscn')
 
 func get_input():
 	var x = 0
 	var jump = 0
-	if (Input.is_action_pressed('ui_left')): x += -1
-	if (Input.is_action_pressed('ui_right')): x += 1
-	if (Input.is_action_just_pressed('ui_up') and is_on_floor()): jump = 1
+	if Input.is_action_pressed('ui_left'): x += -1
+	if Input.is_action_pressed('ui_right'): x += 1
+	if Input.is_action_just_pressed('ui_up'):
+		if is_on_floor():
+			jump = 1
+			jumped = false
+		elif not jumped:
+			jump = 1
+			emit_signal('Double_Jumped')
+			jumped = true
 	if x != 0:
 		facing_dir = x
 		$AnimatedSprite.flip_h = false if x > 0 else true
@@ -46,7 +53,6 @@ func _ready():
 	start_pos = position
 	gravity = -2*Jump_Height/Jump_Time/Jump_Time
 	jump_velocity = abs(gravity)*Jump_Time
-	change_health(Max_Health)
 	#print('gravity:', gravity, ' jump velocity:', jump_velocity)
 
 func _process(delta):
@@ -73,13 +79,9 @@ func _physics_process(delta):
 	if (new_vel_x*desired_vel_x < 0):
 		new_vel_x = 0
 
-	var new_vel_y = velocity.y - gravity*delta - jump*jump_velocity
+	var new_vel_y = (1-jump)*(velocity.y - gravity*delta) - jump*jump_velocity
 	velocity = move_and_slide(Vector2(new_vel_x, new_vel_y), Vector2(0, -1))
 
 func _input(event):
 	if (get_node('/root/global').DEBUG and event.is_action_pressed('ui_focus_next')):
 		position = start_pos
-
-func change_health(amount):
-	current_health += amount
-	emit_signal('Health_Changed', current_health)

@@ -6,6 +6,7 @@ export(float) var Max_Change_Time
 export(float) var Dps
 
 signal Killed
+signal Player_Overlap(dps)
 
 var explosion_scene = preload('res://scenes/Explosion.tscn')
 
@@ -32,7 +33,7 @@ func _process(delta):
 	# collision with player
 	var player = $'../../Player'
 	if overlaps_body(player):
-		player.change_health(-Dps*delta)
+		emit_signal('Player_Overlap', Dps*delta*60)
 
 	# update change
 	next_change -= delta

@@ -18,6 +18,10 @@ config/icon="res://icon.png"
 
 global="*res://scripts/global.gd"
 
+[display]
+
+window/size/resizable=false
+
 [rendering]
 
 quality/2d/use_pixel_snap=true
