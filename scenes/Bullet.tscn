@@ -63,24 +63,22 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Gravity", "Initial Velocity", "Trail" ]
 
-[node name="Bullet" type="Node2D" index="0"]
+[node name="Bullet" type="Node2D"]
 
 script = ExtResource( 1 )
 Speed = 500.0
+Max_Distance = 300.0
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="0"]
-
-rect = Rect2( -10, -10, 20, 20 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "default"
+frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 
-[node name="Particles2D" type="Particles2D" parent="." index="2"]
+[node name="Particles2D" type="Particles2D" parent="." index="1"]
 
 emitting = true
 amount = 8

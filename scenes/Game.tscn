@@ -85,7 +85,7 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" index="0"]
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
@@ -185,10 +185,9 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 1
 playing = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
+[node name="UI" type="CanvasLayer" parent="." index="4"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -196,8 +195,9 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 20 )
+Enemy_Kill_Score = 100
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" index="0"]
+[node name="ProgressBar" type="ProgressBar" parent="UI" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -224,8 +224,32 @@ rounded = false
 percent_visible = false
 _sections_unfolded = [ "custom_styles" ]
 
+[node name="ScoreLabel" type="Label" parent="UI" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 908.0
+margin_top = 17.0
+margin_right = 991.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "500"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Size Flags" ]
+
 [connection signal="map_generated" from="TileMap" to="Spawner" method="_on_TileMap_map_generated"]
 
-[connection signal="Health_Changed" from="Player" to="CanvasLayer" method="_on_Player_Health_Changed"]
+[connection signal="Health_Changed" from="Player" to="UI" method="_on_Player_Health_Changed"]
 
 

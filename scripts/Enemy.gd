@@ -5,6 +5,8 @@ export(float) var Min_Change_Time
 export(float) var Max_Change_Time
 export(float) var Dps
 
+signal Killed
+
 var explosion_scene = preload('res://scenes/Explosion.tscn')
 
 var direction_x = 0
@@ -19,6 +21,7 @@ func hit_by_bullet():
 	explosion_node.position = position
 	$'..'.add_child(explosion_node)
 	explosion_node.restart()
+	emit_signal('Killed')
 	queue_free()
 
 func _ready():
