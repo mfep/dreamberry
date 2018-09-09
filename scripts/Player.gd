@@ -9,6 +9,7 @@ export(float) var Shoot_Interval
 signal Double_Jumped
 
 var dust_scene = preload('res://scenes/DustParticles.tscn')
+var bullett_scene = preload('res://scenes/Bullet.tscn')
 
 var velocity = Vector2()
 var gravity = 0
@@ -18,8 +19,6 @@ var shoot_time = 0
 var facing_dir = 1
 var current_health = 0
 var jumped = false
-
-var bullett_scene = preload('res://scenes/Bullet.tscn')
 
 func get_input():
 	var x = 0
