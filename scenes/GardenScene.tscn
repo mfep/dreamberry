@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/TreeSpawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/trees/Tree1.tscn" type="PackedScene" id=2]
@@ -10,25 +10,27 @@
 [ext_resource path="res://sprites/player_atlas/player_idle1.tres" type="Texture" id=8]
 [ext_resource path="res://sprites/player_atlas/player_idle2.tres" type="Texture" id=9]
 [ext_resource path="res://sprites/player_atlas/player_idle3.tres" type="Texture" id=10]
-[ext_resource path="res://sprites/player_atlas/player_run0.tres" type="Texture" id=11]
-[ext_resource path="res://sprites/player_atlas/player_run1.tres" type="Texture" id=12]
-[ext_resource path="res://sprites/player_atlas/player_run2.tres" type="Texture" id=13]
-[ext_resource path="res://sprites/player_atlas/player_run3.tres" type="Texture" id=14]
-[ext_resource path="res://sprites/player_atlas/player_jump0.tres" type="Texture" id=15]
-[ext_resource path="res://sprites/player_atlas/player_jump1.tres" type="Texture" id=16]
-[ext_resource path="res://sprites/player_atlas/player_jump2.tres" type="Texture" id=17]
-[ext_resource path="res://sprites/player_atlas/player_jump3.tres" type="Texture" id=18]
-[ext_resource path="res://sprites/player_atlas/player_jump4.tres" type="Texture" id=19]
-[ext_resource path="res://sprites/player_atlas/player_jump5.tres" type="Texture" id=20]
-[ext_resource path="res://sprites/player_atlas/player_jump6.tres" type="Texture" id=21]
+[ext_resource path="res://sprites/player_atlas/player_jump0.tres" type="Texture" id=11]
+[ext_resource path="res://sprites/player_atlas/player_jump1.tres" type="Texture" id=12]
+[ext_resource path="res://sprites/player_atlas/player_jump2.tres" type="Texture" id=13]
+[ext_resource path="res://sprites/player_atlas/player_jump3.tres" type="Texture" id=14]
+[ext_resource path="res://sprites/player_atlas/player_jump4.tres" type="Texture" id=15]
+[ext_resource path="res://sprites/player_atlas/player_jump5.tres" type="Texture" id=16]
+[ext_resource path="res://sprites/player_atlas/player_jump6.tres" type="Texture" id=17]
+[ext_resource path="res://sprites/player_atlas/player_run0.tres" type="Texture" id=18]
+[ext_resource path="res://sprites/player_atlas/player_run1.tres" type="Texture" id=19]
+[ext_resource path="res://sprites/player_atlas/player_run2.tres" type="Texture" id=20]
+[ext_resource path="res://sprites/player_atlas/player_run3.tres" type="Texture" id=21]
 [ext_resource path="res://scenes/trees/Seed1.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scripts/UI.gd" type="Script" id=23]
 [ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=24]
-[ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=25]
-[ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=26]
-[ext_resource path="res://sprites/seeds/seed-scaled-2.png" type="Texture" id=27]
-[ext_resource path="res://sprites/seeds/seed-scaled-3.png" type="Texture" id=28]
-[ext_resource path="res://sprites/seeds/seed-scaled-4.png" type="Texture" id=29]
+[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=25]
+[ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=26]
+[ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=27]
+[ext_resource path="res://sprites/seeds/seed-scaled-2.png" type="Texture" id=28]
+[ext_resource path="res://sprites/seeds/seed-scaled-3.png" type="Texture" id=29]
+[ext_resource path="res://sprites/seeds/seed-scaled-4.png" type="Texture" id=30]
+[ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=31]
 
 [sub_resource type="Gradient" id=1]
 
@@ -55,15 +57,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
 } ]
 
 [sub_resource type="DynamicFont" id=5]
@@ -93,15 +95,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1.6, 1.6 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=7]
-
-size = 25
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 24 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[node name="GardenScene" type="Node"]
+[node name="GardenScene" type="Node" index="0"]
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
@@ -224,7 +218,6 @@ position = Vector2( 422.384, -119.556 )
 
 [node name="UI" type="CanvasLayer" parent="." index="5"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -274,14 +267,14 @@ anims/scored = SubResource( 6 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="PlantButtons" type="VBoxContainer" parent="UI" index="1"]
+[node name="Container" type="VBoxContainer" parent="UI" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 174.0
-margin_bottom = 199.0
+margin_bottom = 256.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -289,8 +282,11 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="PlantTreeButton" type="Button" parent="UI/PlantButtons" index="0"]
+[node name="PlantTreeButton" type="Button" parent="UI/Container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -305,18 +301,18 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = ExtResource( 25 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Plant Tree"
-icon = ExtResource( 25 )
+icon = ExtResource( 26 )
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="PlantTreeButton2" type="Button" parent="UI/PlantButtons" index="1"]
+[node name="PlantTreeButton2" type="Button" parent="UI/Container" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -332,18 +328,18 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = ExtResource( 25 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Plant Tree"
-icon = ExtResource( 26 )
+icon = ExtResource( 27 )
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="PlantTreeButton3" type="Button" parent="UI/PlantButtons" index="2"]
+[node name="PlantTreeButton3" type="Button" parent="UI/Container" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -359,18 +355,18 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = ExtResource( 25 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Plant Tree"
-icon = ExtResource( 27 )
+icon = ExtResource( 28 )
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="PlantTreeButton4" type="Button" parent="UI/PlantButtons" index="3"]
+[node name="PlantTreeButton4" type="Button" parent="UI/Container" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -386,18 +382,18 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = ExtResource( 25 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Plant Tree"
-icon = ExtResource( 28 )
+icon = ExtResource( 29 )
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="PlantTreeButton5" type="Button" parent="UI/PlantButtons" index="4"]
+[node name="PlantTreeButton5" type="Button" parent="UI/Container" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -413,29 +409,146 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = ExtResource( 25 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Plant Tree"
-icon = ExtResource( 29 )
+icon = ExtResource( 30 )
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
+
+[node name="PickedSeedsContainer" type="HBoxContainer" parent="UI/Container" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 210.0
+margin_right = 174.0
+margin_bottom = 256.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource( 31 )
+_sections_unfolded = [ "Size Flags" ]
+Seed_Textures = [ ExtResource( 26 ), ExtResource( 27 ) ]
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Container/PickedSeedsContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 55.0
+margin_bottom = 46.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="TextureRect" type="TextureRect" parent="UI/Container/PickedSeedsContainer/PanelContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 48.0
+margin_bottom = 39.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 26 )
+stretch_mode = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/Container/PickedSeedsContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 59.0
+margin_right = 114.0
+margin_bottom = 46.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Container/PickedSeedsContainer/PanelContainer2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 48.0
+margin_bottom = 39.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 27 )
+stretch_mode = 4
+
+[node name="GoButton" type="Button" parent="UI/Container/PickedSeedsContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 118.0
+margin_right = 174.0
+margin_bottom = 46.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 25 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "go"
+flat = false
+align = 1
+_sections_unfolded = [ "Margin", "Size Flags", "custom_fonts" ]
 
 [connection signal="Map_generated" from="TileMap" to="TreeSpawner" method="_on_TileMap_Map_generated"]
 
 [connection signal="Double_Jumped" from="Player" to="UI" method="_on_Player_Double_Jumped"]
 
-[connection signal="pressed" from="UI/PlantButtons/PlantTreeButton" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="UI/Container/PlantTreeButton" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 1 ]]
 
-[connection signal="pressed" from="UI/PlantButtons/PlantTreeButton2" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="UI/Container/PlantTreeButton2" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 2 ]]
 
-[connection signal="pressed" from="UI/PlantButtons/PlantTreeButton3" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="UI/Container/PlantTreeButton3" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 3 ]]
 
-[connection signal="pressed" from="UI/PlantButtons/PlantTreeButton4" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="UI/Container/PlantTreeButton4" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 4 ]]
 
-[connection signal="pressed" from="UI/PlantButtons/PlantTreeButton5" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="UI/Container/PlantTreeButton5" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 5 ]]
 
 

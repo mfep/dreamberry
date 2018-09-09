@@ -6,7 +6,7 @@ var DEBUG = false
 var score setget set_score, get_score
 var trees = []
 
-var _score = 3000
+var _score = 0
 
 func set_score(value):
 	_score = value

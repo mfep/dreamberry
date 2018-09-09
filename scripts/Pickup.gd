@@ -1,6 +1,6 @@
 extends Node2D
 
-enum PickupType { Pickup, Seed }
+enum PickupType { Pickup, Seed1, Seed2, Seed3, Seed4, Seed5 }
 
 export(float) var Hover_Freq
 export(float) var Hover_Amplitude

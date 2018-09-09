@@ -54,4 +54,4 @@ func _on_PlantTreeButton_pressed(index):
 	var data = { 'type_index': index-1, 'position': pos, 'flip': flip, 'scale': Vector2(scale, scale) }
 	get_node('/root/global').trees.append(data)
 	get_node('/root/global').score -= cost
-	load_tree(data, true)
+	load_tree(data, false)

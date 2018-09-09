@@ -14,7 +14,7 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 Hover_Freq = 0.2
 Hover_Amplitude = 10.0
-Type = 1
+Type = 2
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
