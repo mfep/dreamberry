@@ -3,6 +3,8 @@ extends Node
 export(int) var Number_Enemies
 export(int) var Number_Pickups
 
+signal All_Spawned(seed_node)
+
 var enemy_scene = preload('res://scenes/Enemy.tscn')
 var pickup_scene = preload('res://scenes/Pickup.tscn')
 var seed_scene = preload('res://scenes/Seed.tscn')
@@ -34,3 +36,4 @@ func _on_TileMap_Map_generated(spawn_points, top_pos):
 	var seed_node = seed_scene.instance()
 	seed_node.position = top_pos
 	add_child(seed_node)
+	emit_signal('All_Spawned', seed_node)
