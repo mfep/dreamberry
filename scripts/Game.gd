@@ -1,13 +1,20 @@
 extends Node
 
 var main_scene = preload('res://scenes/MainScene.tscn')
+var garden_scene = preload('res://scenes/GardenScene.tscn')
 
-var main_node = null
+var current_state_node = null
+
+func reload_garden():
+	current_state_node = garden_scene.instance()
+	current_state_node.get_node('Seed').connect('Picked', self, '_on_Seed_Picked')
+	add_child(current_state_node)
+	get_tree().paused = false
 
 func reload_main():
-	main_node = main_scene.instance()
-	main_node.get_node('Spawner').connect('All_Spawned', self, '_on_Spawner_All_Spawned')
-	add_child(main_node)
+	current_state_node = main_scene.instance()
+	current_state_node.get_node('Spawner').connect('All_Spawned', self, '_on_Spawner_All_Spawned')
+	add_child(current_state_node)
 	get_tree().paused = false
 
 func _ready():
@@ -22,5 +29,6 @@ func _on_Seed_Picked(type):
 	$Timer.start()
 
 func _on_Timer_timeout():
-	main_node.queue_free()
-	reload_main()
+	get_node('/root/global').score = max(0, get_node('/root/global').score)
+	current_state_node.queue_free()
+	reload_main() if current_state_node.name == 'GardenScene' else reload_garden()

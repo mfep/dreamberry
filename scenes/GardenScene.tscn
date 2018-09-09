@@ -1,0 +1,250 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/TileMapGenerator.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://sprites/player_atlas/player_idle0.tres" type="Texture" id=4]
+[ext_resource path="res://sprites/player_atlas/player_idle1.tres" type="Texture" id=5]
+[ext_resource path="res://sprites/player_atlas/player_idle2.tres" type="Texture" id=6]
+[ext_resource path="res://sprites/player_atlas/player_idle3.tres" type="Texture" id=7]
+[ext_resource path="res://sprites/player_atlas/player_run0.tres" type="Texture" id=8]
+[ext_resource path="res://sprites/player_atlas/player_run1.tres" type="Texture" id=9]
+[ext_resource path="res://sprites/player_atlas/player_run2.tres" type="Texture" id=10]
+[ext_resource path="res://sprites/player_atlas/player_run3.tres" type="Texture" id=11]
+[ext_resource path="res://sprites/player_atlas/player_jump0.tres" type="Texture" id=12]
+[ext_resource path="res://sprites/player_atlas/player_jump1.tres" type="Texture" id=13]
+[ext_resource path="res://sprites/player_atlas/player_jump2.tres" type="Texture" id=14]
+[ext_resource path="res://sprites/player_atlas/player_jump3.tres" type="Texture" id=15]
+[ext_resource path="res://sprites/player_atlas/player_jump4.tres" type="Texture" id=16]
+[ext_resource path="res://sprites/player_atlas/player_jump5.tres" type="Texture" id=17]
+[ext_resource path="res://sprites/player_atlas/player_jump6.tres" type="Texture" id=18]
+[ext_resource path="res://scripts/UI.gd" type="Script" id=19]
+[ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=20]
+[ext_resource path="res://scenes/Seed.tscn" type="PackedScene" id=21]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 0.547101, 1 )
+colors = PoolColorArray( 0.0948486, 0.328125, 0.254025, 1, 0.221207, 0.425781, 0.286734, 1, 0.382752, 0.398438, 0.351746, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+
+flags = 4
+gradient = SubResource( 1 )
+width = 2048
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 10.9152
+height = 10.8305
+
+[sub_resource type="SpriteFrames" id=4]
+
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 50
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 20 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=6]
+
+resource_name = "scored"
+length = 0.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.6, 1.6 ), Vector2( 1, 1 ) ]
+}
+
+[node name="GardenScene" type="Node" index="0"]
+
+[node name="Background" type="Sprite" parent="." index="0"]
+
+position = Vector2( -103.605, -472.302 )
+rotation = 1.5708
+scale = Vector2( 0.5, 1200 )
+texture = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TileMap" type="TileMap" parent="." index="1"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Cell" ]
+__meta__ = {
+"_edit_lock_": true
+}
+Map_Width = 32
+Map_Height = 20
+Platforms_Per_Level = 0
+Min_Offset = 3
+Max_Offset = 5
+Min_Platform_Length = 2
+Max_Platform_Length = 8
+Ground_Rows = 2
+
+[node name="Player" type="KinematicBody2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( 46.8026, -70.752 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+Acceleration = 40.0
+Max_Speed = 250.0
+Jump_Height = 144.0
+Jump_Time = 0.3
+Shoot_Interval = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="0"]
+
+position = Vector2( 0.263519, 4.74334 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="Player" index="1"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = 0
+limit_top = -10000000
+limit_right = 1024
+limit_bottom = 0
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Limit", "Smoothing", "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player" index="2"]
+
+frames = SubResource( 4 )
+animation = "idle"
+frame = 3
+playing = true
+
+[node name="UI" type="CanvasLayer" parent="." index="3"]
+
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+script = ExtResource( 19 )
+Enemy_Kill_Score = 100
+Pickup_Score = 50
+Double_Jump_Penalty = 0
+
+[node name="ScoreLabel" type="Label" parent="UI" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 867.0
+margin_top = 29.0
+margin_right = 950.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 40, 26 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "0"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/ScoreLabel" index="0"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/scored = SubResource( 6 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
+
+[node name="Seed" parent="." index="4" instance=ExtResource( 21 )]
+
+position = Vector2( 306.384, -114.556 )
+
+[connection signal="Double_Jumped" from="Player" to="UI" method="_on_Player_Double_Jumped"]
+
+
