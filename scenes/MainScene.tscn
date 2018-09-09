@@ -99,6 +99,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="TreeSpawner" type="Node" parent="." index="1"]
 
 script = ExtResource( 1 )
+Tree_Cost = 1000
 Number_Trees = 5
 Tree_Modulate = Color( 0.660156, 0.660156, 0.660156, 0.77902 )
 Load_Saved_Trees = false
@@ -201,12 +202,11 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="." index="5"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0

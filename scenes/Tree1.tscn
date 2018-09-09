@@ -8,4 +8,8 @@ texture = ExtResource( 1 )
 offset = Vector2( 8, -80 )
 _sections_unfolded = [ "Offset", "Transform", "Visibility" ]
 
+[node name="SeedPos" type="Position2D" parent="." index="0"]
+
+position = Vector2( -46.4262, -103.948 )
+
 
