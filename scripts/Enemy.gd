@@ -29,7 +29,7 @@ func _ready():
 	direction_x = -1 if randi() % 2 else 1
 	new_next_change()
 
-func _process(delta):
+func _physics_process(delta):
 	# collision with player
 	var player = $'../../Player'
 	if overlaps_body(player):

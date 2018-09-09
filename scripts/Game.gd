@@ -18,7 +18,7 @@ func reload_main():
 	get_tree().paused = false
 
 func _ready():
-	reload_main()
+	reload_garden()
 
 func _on_Spawner_All_Spawned(seed_node):
 	seed_node.connect('Picked', self, '_on_Seed_Picked')

@@ -8,6 +8,7 @@ export(int) var Max_Offset
 export(int) var Min_Platform_Length
 export(int) var Max_Platform_Length
 export(int) var Ground_Rows
+export(int) var Generation_Seed
 
 signal Map_generated(spawn_points, top_pos)
 var spawn_points = []
@@ -95,7 +96,10 @@ func generate():
 	emit_signal('Map_generated', spawn_points, top_pos)
 
 func _ready():
-	randomize()
+	if Generation_Seed != null:
+		seed(Generation_Seed)
+	else:
+		randomize()
 	generate()
 
 func _input(event):

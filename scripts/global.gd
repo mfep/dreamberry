@@ -1,4 +1,5 @@
 extends Node
 
-var DEBUG = true
+var DEBUG = false
 var score = 0
+var trees = []
