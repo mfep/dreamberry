@@ -7,7 +7,7 @@ signal All_Spawned(seed_node)
 
 var enemy_scene = preload('res://scenes/Enemy.tscn')
 var pickup_scene = preload('res://scenes/Pickup.tscn')
-var seed_scene = preload('res://scenes/Seed.tscn')
+var seed_scene = preload('res://scenes/trees/Seed1.tscn')
 
 func _on_TileMap_Map_generated(spawn_points, top_pos):
 	# clear
