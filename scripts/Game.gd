@@ -17,6 +17,9 @@ func reload_garden():
 
 func reload_main():
 	current_state_node = main_scene.instance()
+	apply_seed_effects(picked_seeds[0])
+	apply_seed_effects(picked_seeds[1])
+	picked_seeds = [0, 0]
 	current_state_node.get_node('Spawner').connect('All_Spawned', self, '_on_Spawner_All_Spawned')
 	add_child(current_state_node)
 	get_tree().paused = false
@@ -44,6 +47,15 @@ func _on_Timer_timeout():
 	reload_main() if current_state_node.name == 'GardenScene' else reload_garden()
 
 func _on_Go_Button_pressed():
-	picked_seeds = [0, 0]
 	get_tree().paused = true
 	$Timer.start()
+	
+func apply_seed_effects(index):
+	match index:
+		0: pass
+		1: # quick movement seed
+		#	current_state_node.get_node('Player').Acceleration *= 2
+		#	current_state_node.get_node('Player').Max_Speed *= 1.6
+		#2: # blurred
+		#	current_state_node.get_node('Player').Shoot_Interval *= 0.5
+			pass
