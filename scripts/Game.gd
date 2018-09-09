@@ -54,8 +54,9 @@ func apply_seed_effects(index):
 	match index:
 		0: pass
 		1: # quick movement seed
-		#	current_state_node.get_node('Player').Acceleration *= 2
-		#	current_state_node.get_node('Player').Max_Speed *= 1.6
-		#2: # blurred
-		#	current_state_node.get_node('Player').Shoot_Interval *= 0.5
-			pass
+			current_state_node.get_node('Player').Acceleration *= 2
+			current_state_node.get_node('Player').Max_Speed *= 1.6
+		2: # blurred
+			current_state_node.get_node('UI/BlurPostProc').visible = true
+		3: # saturated
+			current_state_node.get_node('UI/SaturationPostProc').visible = true
