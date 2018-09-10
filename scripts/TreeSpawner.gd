@@ -3,12 +3,11 @@ extends Node
 export(int) var Number_Trees
 export(Color) var Tree_Modulate
 export(bool) var Load_Saved_Trees = false
-export(Array) var Tree_Scenes
 
 func generate_trees(spawn_points):
 	var points = spawn_points.duplicate()
 	for i in range(Number_Trees):
-		var tree_node = Tree_Scenes[randi() % Tree_Scenes.size()].instance()
+		var tree_node = $'/root/TreesSeeds'.get_random_tree().instance()
 		var point_idx = randi() % points.size()
 		tree_node.position = spawn_points[point_idx] + Vector2(0, 16)
 		tree_node.modulate = Tree_Modulate
@@ -20,7 +19,7 @@ func generate_trees(spawn_points):
 
 func load_tree(tree_data, with_seed):
 	# tree
-	var tree_node = Tree_Scenes[tree_data['type_index']].instance()
+	var tree_node = $'/root/TreesSeeds'.Trees[tree_data['type_index']].instance()
 	tree_node.position = tree_data['position']
 	tree_node.flip_h = tree_data['flip']
 	tree_node.scale = tree_data['scale']

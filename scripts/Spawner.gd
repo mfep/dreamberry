@@ -5,7 +5,6 @@ export(int) var Number_Pickups
 
 var enemy_scene = preload('res://scenes/Enemy.tscn')
 var pickup_scene = preload('res://scenes/Pickup.tscn')
-var seed_scene = preload('res://scenes/trees/Seed1.tscn')
 
 func _on_TileMap_Map_generated(spawn_points, top_pos):
 	# clear
@@ -28,6 +27,6 @@ func _on_TileMap_Map_generated(spawn_points, top_pos):
 		add_child(enemy_node)
 
 	# spawn seed
-	var seed_node = seed_scene.instance()
+	var seed_node = $'/root/TreesSeeds'.get_random_seed().instance()
 	seed_node.position = top_pos
 	add_child(seed_node)

@@ -1,34 +1,33 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/TreeSpawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/trees/Tree1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/trees/Tree2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://scripts/TileMapGenerator.gd" type="Script" id=5]
-[ext_resource path="res://scripts/Player.gd" type="Script" id=6]
-[ext_resource path="res://sprites/player_atlas/player_idle0.tres" type="Texture" id=7]
-[ext_resource path="res://sprites/player_atlas/player_idle1.tres" type="Texture" id=8]
-[ext_resource path="res://sprites/player_atlas/player_idle2.tres" type="Texture" id=9]
-[ext_resource path="res://sprites/player_atlas/player_idle3.tres" type="Texture" id=10]
-[ext_resource path="res://sprites/player_atlas/player_run0.tres" type="Texture" id=11]
-[ext_resource path="res://sprites/player_atlas/player_run1.tres" type="Texture" id=12]
-[ext_resource path="res://sprites/player_atlas/player_run2.tres" type="Texture" id=13]
-[ext_resource path="res://sprites/player_atlas/player_run3.tres" type="Texture" id=14]
-[ext_resource path="res://sprites/player_atlas/player_jump0.tres" type="Texture" id=15]
-[ext_resource path="res://sprites/player_atlas/player_jump1.tres" type="Texture" id=16]
-[ext_resource path="res://sprites/player_atlas/player_jump2.tres" type="Texture" id=17]
-[ext_resource path="res://sprites/player_atlas/player_jump3.tres" type="Texture" id=18]
-[ext_resource path="res://sprites/player_atlas/player_jump4.tres" type="Texture" id=19]
-[ext_resource path="res://sprites/player_atlas/player_jump5.tres" type="Texture" id=20]
-[ext_resource path="res://sprites/player_atlas/player_jump6.tres" type="Texture" id=21]
-[ext_resource path="res://scenes/trees/Seed1.tscn" type="PackedScene" id=22]
-[ext_resource path="res://scripts/UI.gd" type="Script" id=23]
-[ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=24]
-[ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=25]
-[ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=26]
-[ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=27]
-[ext_resource path="res://SeedStyleBox.tres" type="StyleBox" id=28]
-[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=29]
+[ext_resource path="res://Tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://scripts/TileMapGenerator.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=5]
+[ext_resource path="res://sprites/player_atlas/player_idle0.tres" type="Texture" id=6]
+[ext_resource path="res://sprites/player_atlas/player_idle1.tres" type="Texture" id=7]
+[ext_resource path="res://sprites/player_atlas/player_idle2.tres" type="Texture" id=8]
+[ext_resource path="res://sprites/player_atlas/player_idle3.tres" type="Texture" id=9]
+[ext_resource path="res://sprites/player_atlas/player_run0.tres" type="Texture" id=10]
+[ext_resource path="res://sprites/player_atlas/player_run1.tres" type="Texture" id=11]
+[ext_resource path="res://sprites/player_atlas/player_run2.tres" type="Texture" id=12]
+[ext_resource path="res://sprites/player_atlas/player_run3.tres" type="Texture" id=13]
+[ext_resource path="res://sprites/player_atlas/player_jump0.tres" type="Texture" id=14]
+[ext_resource path="res://sprites/player_atlas/player_jump1.tres" type="Texture" id=15]
+[ext_resource path="res://sprites/player_atlas/player_jump2.tres" type="Texture" id=16]
+[ext_resource path="res://sprites/player_atlas/player_jump3.tres" type="Texture" id=17]
+[ext_resource path="res://sprites/player_atlas/player_jump4.tres" type="Texture" id=18]
+[ext_resource path="res://sprites/player_atlas/player_jump5.tres" type="Texture" id=19]
+[ext_resource path="res://sprites/player_atlas/player_jump6.tres" type="Texture" id=20]
+[ext_resource path="res://scenes/trees/Seed1.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scripts/UI.gd" type="Script" id=22]
+[ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=23]
+[ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=24]
+[ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=25]
+[ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=26]
+[ext_resource path="res://SeedStyleBox.tres" type="StyleBox" id=27]
+[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=28]
 
 [sub_resource type="Gradient" id=1]
 
@@ -50,17 +49,17 @@ height = 10.8305
 [sub_resource type="SpriteFrames" id=4]
 
 animations = [ {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
@@ -71,7 +70,7 @@ animations = [ {
 size = 50
 use_mipmaps = false
 use_filter = true
-font_data = ExtResource( 24 )
+font_data = ExtResource( 23 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Animation" id=6]
@@ -109,7 +108,6 @@ script = ExtResource( 1 )
 Number_Trees = null
 Tree_Modulate = Color( 1, 1, 1, 1 )
 Load_Saved_Trees = true
-Tree_Scenes = [ ExtResource( 2 ), ExtResource( 3 ) ]
 
 [node name="Tree" parent="TreeSpawner" index="0" instance=ExtResource( 2 )]
 
@@ -118,7 +116,7 @@ position = Vector2( 469, -17 )
 [node name="TileMap" type="TileMap" parent="." index="2"]
 
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -134,7 +132,7 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Cell" ]
 __meta__ = {
 "_edit_lock_": true
@@ -156,7 +154,7 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
@@ -207,12 +205,11 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="SeedPos" type="Position2D" parent="Player" index="3"]
 
-[node name="Seed" parent="." index="4" instance=ExtResource( 22 )]
+[node name="Seed" parent="." index="4" instance=ExtResource( 21 )]
 
 position = Vector2( 422.384, -119.556 )
 
@@ -223,7 +220,7 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-script = ExtResource( 23 )
+script = ExtResource( 22 )
 
 [node name="ScoreLabel" type="Label" parent="UI" index="0"]
 
@@ -282,12 +279,12 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
 alignment = 1
-script = ExtResource( 25 )
+script = ExtResource( 24 )
 _sections_unfolded = [ "Anchor", "Margin", "Size Flags" ]
 __meta__ = {
 "_edit_group_": true
 }
-Seed_Textures = [ ExtResource( 26 ), ExtResource( 27 ) ]
+Seed_Textures = [ ExtResource( 25 ), ExtResource( 26 ) ]
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/PickedSeedsContainer" index="0"]
 
@@ -303,7 +300,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 28 )
+custom_styles/panel = ExtResource( 27 )
 _sections_unfolded = [ "Size Flags", "custom_styles" ]
 
 [node name="TextureRect" type="TextureRect" parent="UI/PickedSeedsContainer/PanelContainer" index="0"]
@@ -322,7 +319,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 26 )
+texture = ExtResource( 25 )
 stretch_mode = 4
 
 [node name="PanelContainer2" type="PanelContainer" parent="UI/PickedSeedsContainer" index="1"]
@@ -340,7 +337,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 28 )
+custom_styles/panel = ExtResource( 27 )
 _sections_unfolded = [ "Size Flags", "custom_styles" ]
 
 [node name="TextureRect2" type="TextureRect" parent="UI/PickedSeedsContainer/PanelContainer2" index="0"]
@@ -359,7 +356,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 27 )
+texture = ExtResource( 26 )
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="UI" index="2"]
@@ -377,7 +374,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 29 )
+custom_fonts/font = ExtResource( 28 )
 text = "press 'space' to plant tree"
 align = 1
 valign = 1

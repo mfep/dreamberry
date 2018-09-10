@@ -8,7 +8,6 @@ const SaturationSeed = 4
 signal Score_Changed(new_score)
 signal Picked_Seeds_Changed(seeds)
 
-export(Array) var Seed_Scenes;
 export(Array, int) var Tree_Costs
 export(int) var Enemy_Kill_Score
 export(int) var Pickup_Score
@@ -35,7 +34,7 @@ func get_score():
 func reload_garden():
 	current_state_node = garden_scene.instance()
 	if picked_seed_index != 0:
-		var seed_node = Seed_Scenes[picked_seed_index - 1].instance()
+		var seed_node = $'/root/TreesSeeds'.Seeds[picked_seed_index - 1].instance()
 		seed_node.get_node('Area2D').monitoring = false
 		seed_node.scale *= 0.75
 		current_state_node.get_node('Player/SeedPos').add_child(seed_node)
@@ -66,7 +65,7 @@ func _input(event):
 				start_Timer()
 			HasSeedNotEnoughScore:
 				current_state_node.get_node('Player/SeedPos').get_child(0).queue_free()
-				var seed_node = Seed_Scenes[picked_seed_index-1].instance()
+				var seed_node = $'/root/TreesSeeds'.Seeds[picked_seed_index-1].instance()
 				seed_node.position = current_state_node.get_node('Player').position + Vector2(0, -64)
 				current_state_node.add_child(seed_node)
 				picked_seed_index = 0
