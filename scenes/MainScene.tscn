@@ -155,7 +155,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 Map_Width = 32
-Map_Height = 60
+Map_Height = 20
 Platforms_Per_Level = 4
 Min_Offset = 3
 Max_Offset = 5
@@ -233,9 +233,6 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 23 )
-Enemy_Kill_Score = 100
-Pickup_Score = 50
-Double_Jump_Penalty = 150
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="UI" index="0"]
 

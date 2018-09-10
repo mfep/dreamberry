@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/TreeSpawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/trees/Tree1.tscn" type="PackedScene" id=2]
@@ -27,7 +27,8 @@
 [ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=25]
 [ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=26]
 [ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=27]
-[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=28]
+[ext_resource path="res://SeedStyleBox.tres" type="StyleBox" id=28]
+[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=29]
 
 [sub_resource type="Gradient" id=1]
 
@@ -92,7 +93,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1.6, 1.6 ), Vector2( 1, 1 ) ]
 }
 
-[node name="GardenScene" type="Node"]
+[node name="GardenScene" type="Node" index="0"]
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
@@ -223,9 +224,6 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 23 )
-Enemy_Kill_Score = 100
-Pickup_Score = 50
-Double_Jump_Penalty = 0
 
 [node name="ScoreLabel" type="Label" parent="UI" index="0"]
 
@@ -267,33 +265,16 @@ anims/scored = SubResource( 6 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="Container" type="VBoxContainer" parent="UI" index="1"]
+[node name="PickedSeedsContainer" type="HBoxContainer" parent="UI" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 174.0
-margin_bottom = 61.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="PickedSeedsContainer" type="HBoxContainer" parent="UI/Container" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 174.0
-margin_bottom = 61.0
+margin_left = 460.0
+margin_top = 89.0
+margin_right = 570.0
+margin_bottom = 135.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -302,35 +283,39 @@ size_flags_horizontal = 1
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource( 25 )
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Margin", "Size Flags" ]
+__meta__ = {
+"_edit_group_": true
+}
 Seed_Textures = [ ExtResource( 26 ), ExtResource( 27 ) ]
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/Container/PickedSeedsContainer" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/PickedSeedsContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 85.0
-margin_bottom = 61.0
+margin_right = 53.0
+margin_bottom = 46.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Size Flags" ]
+custom_styles/panel = ExtResource( 28 )
+_sections_unfolded = [ "Size Flags", "custom_styles" ]
 
-[node name="TextureRect" type="TextureRect" parent="UI/Container/PickedSeedsContainer/PanelContainer" index="0"]
+[node name="TextureRect" type="TextureRect" parent="UI/PickedSeedsContainer/PanelContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 78.0
-margin_bottom = 54.0
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 51.0
+margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -340,33 +325,34 @@ size_flags_vertical = 1
 texture = ExtResource( 26 )
 stretch_mode = 4
 
-[node name="PanelContainer2" type="PanelContainer" parent="UI/Container/PickedSeedsContainer" index="1"]
+[node name="PanelContainer2" type="PanelContainer" parent="UI/PickedSeedsContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 89.0
-margin_right = 174.0
-margin_bottom = 61.0
+margin_left = 57.0
+margin_right = 110.0
+margin_bottom = 46.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Size Flags" ]
+custom_styles/panel = ExtResource( 28 )
+_sections_unfolded = [ "Size Flags", "custom_styles" ]
 
-[node name="TextureRect2" type="TextureRect" parent="UI/Container/PickedSeedsContainer/PanelContainer2" index="0"]
+[node name="TextureRect2" type="TextureRect" parent="UI/PickedSeedsContainer/PanelContainer2" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 78.0
-margin_bottom = 54.0
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 51.0
+margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -391,7 +377,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 28 )
+custom_fonts/font = ExtResource( 29 )
 text = "press 'space' to plant tree"
 align = 1
 valign = 1
