@@ -50,6 +50,7 @@ func get_input():
 	return [x, jump]
 	
 func _ready():
+	connect('Double_Jumped', $'/root/Game', '_on_Player_Double_Jumped')
 	start_pos = position
 	gravity = -2*Jump_Height/Jump_Time/Jump_Time
 	jump_velocity = abs(gravity)*Jump_Time

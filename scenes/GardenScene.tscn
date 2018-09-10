@@ -206,6 +206,7 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="SeedPos" type="Position2D" parent="Player" index="3"]
@@ -400,7 +401,5 @@ max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [connection signal="Map_generated" from="TileMap" to="TreeSpawner" method="_on_TileMap_Map_generated"]
-
-[connection signal="Double_Jumped" from="Player" to="UI" method="_on_Player_Double_Jumped"]
 
 

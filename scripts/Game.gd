@@ -7,6 +7,9 @@ signal Picked_Seeds_Changed(seeds)
 
 export(Array) var Seed_Scenes;
 export(Array, int) var Tree_Costs
+export(int) var Enemy_Kill_Score
+export(int) var Pickup_Score
+export(int) var Double_Jump_Penalty
 
 var main_scene = preload('res://scenes/MainScene.tscn')
 var garden_scene = preload('res://scenes/GardenScene.tscn')
@@ -70,14 +73,29 @@ func _input(event):
 		update_label()
 
 func _on_Seed_Picked(type):
-	if type == 0: return
-	if current_state_node.name == 'GardenScene':
+	if type == 0:
+		_score += Pickup_Score
+		emit_signal('Score_Changed', _score)
+	elif current_state_node.name == 'GardenScene':
 		picked_seeds.push_front(type)
 		picked_seeds.pop_back()
 		emit_signal('Picked_Seeds_Changed', picked_seeds)
 	else:
 		get_tree().paused = true
 		$Timer.start()
+
+func _on_Enemy_Killed():
+	_score += Enemy_Kill_Score
+	emit_signal('Score_Changed', _score)
+
+func _on_Enemy_Player_Overlap(damage):
+	_score -= damage
+	emit_signal('Score_Changed', _score)
+
+func _on_Player_Double_Jumped():
+	if current_state_node.name != 'GardenScene':
+		_score -= Double_Jump_Penalty
+		emit_signal('Score_Changed', _score)
 
 func _on_Timer_timeout():
 	_score = max(0, _score)

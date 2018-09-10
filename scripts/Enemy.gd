@@ -26,6 +26,8 @@ func hit_by_bullet():
 	queue_free()
 
 func _ready():
+	connect('Killed', $'/root/Game', '_on_Enemy_Killed')
+	connect('Player_Overlap', $'/root/Game', '_on_Enemy_Player_Overlap')
 	direction_x = -1 if randi() % 2 else 1
 	new_next_change()
 

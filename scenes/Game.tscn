@@ -9,6 +9,9 @@
 script = ExtResource( 1 )
 Seed_Scenes = [ ExtResource( 2 ), ExtResource( 3 ) ]
 Tree_Costs = [ 1000, 1500 ]
+Enemy_Kill_Score = 100
+Pickup_Score = 50
+Double_Jump_Penalty = 150
 
 [node name="Timer" type="Timer" parent="." index="0"]
 

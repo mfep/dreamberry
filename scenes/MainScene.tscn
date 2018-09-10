@@ -332,6 +332,4 @@ _sections_unfolded = [ "Playback Options" ]
 
 [connection signal="Map_generated" from="TileMap" to="Spawner" method="_on_TileMap_Map_generated"]
 
-[connection signal="Double_Jumped" from="Player" to="UI" method="_on_Player_Double_Jumped"]
-
 
