@@ -1,6 +1,9 @@
 extends Node
 
 enum Status { GoDream, CanPlant, HasSeedNotEnoughScore }
+const QuickSeed = 1
+const BlurredSeed = 2
+const SaturationSeed = 4
 
 signal Score_Changed(new_score)
 signal Picked_Seeds_Changed(seeds)
@@ -43,8 +46,11 @@ func reload_garden():
 
 func reload_main():
 	current_state_node = main_scene.instance()
-	apply_seed_effects(picked_seeds[0])
-	apply_seed_effects(picked_seeds[1])
+	var mask = 0
+	for seed_idx in picked_seeds:
+		if seed_idx:
+			mask |= 1 << (seed_idx - 1)
+	apply_seed_effects(mask)
 	picked_seeds = [0, 0]
 	picked_seed_index = 0
 	add_child(current_state_node)
@@ -108,21 +114,14 @@ func start_Timer():
 	get_tree().paused = true
 	$Timer.start()
 
-func apply_seed_effects(index):
-	match index:
-		0: pass
-		1: # quick movement seed
-			current_state_node.get_node('Player').Acceleration *= 2
-			current_state_node.get_node('Player').Max_Speed *= 1.6
-		2: # blurred
-			current_state_node.get_node('UI/BlurPostProc').visible = true
-		3: # saturated
-			current_state_node.get_node('UI/SaturationPostProc').visible = true
-		4: # former health TODO
-			print('WARNING: Seed4 not implemented!')
-		5: # former health TODO
-			print('WARNING: Seed5 not implemented!')
-		_: assert(false)
+func apply_seed_effects(mask):
+	if mask & QuickSeed:
+		current_state_node.get_node('Player').Acceleration *= 2
+		current_state_node.get_node('Player').Max_Speed *= 1.6
+	if mask & BlurredSeed:
+		current_state_node.get_node('UI/BlurPostProc').visible = true
+	if mask & SaturationSeed:
+		current_state_node.get_node('UI/SaturationPostProc').visible = true
 
 func get_status():
 	if picked_seed_index == 0: return GoDream
