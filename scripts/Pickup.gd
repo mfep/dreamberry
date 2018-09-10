@@ -12,6 +12,7 @@ var initial_pos;
 
 func _ready():
 	initial_pos = position
+	connect('Picked', $'/root/Game', '_on_Seed_Picked')
 
 func _process(delta):
 	position = initial_pos + Vector2(0, Hover_Amplitude*sin(2*PI*Hover_Freq*OS.get_ticks_msec()/1000))

@@ -4,7 +4,6 @@ export(Array) var Seed_Textures
 
 func _ready():
 	$'/root/Game'.connect('Picked_Seeds_Changed', self, '_on_Picked_Seeds_Changed')
-	$GoButton.connect('pressed', $'/root/Game', '_on_Go_Button_pressed')
 
 func _on_Picked_Seeds_Changed(seeds):
 	update_texture($PanelContainer/TextureRect, seeds[0])

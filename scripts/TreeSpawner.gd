@@ -4,7 +4,6 @@ export(int) var Number_Trees
 export(Color) var Tree_Modulate
 export(bool) var Load_Saved_Trees = false
 export(Array) var Tree_Scenes
-export(Array, int) var Tree_Costs
 
 func generate_trees(spawn_points):
 	var points = spawn_points.duplicate()
@@ -44,15 +43,11 @@ func _on_TileMap_Map_generated(spawn_points, top_pos):
 
 func plant_tree(index):
 	var player = $'../Player'
-	var score = get_node('/root/Game').score
-	var cost = Tree_Costs[index-1]
-	if not player.is_on_floor() or score < cost:
-		return false
+	if not player.is_on_floor():
+		return null
 	var pos = player.position + Vector2(0, 32)
 	var flip = randi() % 2 == 0
 	var scale = 1
 	var data = { 'type_index': index-1, 'position': pos, 'flip': flip, 'scale': Vector2(scale, scale) }
-	get_node('/root/Game').trees.append(data)
-	get_node('/root/Game').score -= cost
 	load_tree(data, false)
-	return true
+	return data
