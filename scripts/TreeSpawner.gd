@@ -32,7 +32,7 @@ func load_tree(tree_data, with_seed):
 	if with_seed: tree_node.instantiate_seed()
 
 func load_trees():
-	var tree_data_array = get_node('/root/global').trees
+	var tree_data_array = get_node('/root/Game').trees
 	for tree_data in tree_data_array:
 		load_tree(tree_data, true)
 
@@ -44,7 +44,7 @@ func _on_TileMap_Map_generated(spawn_points, top_pos):
 
 func _on_PlantTreeButton_pressed(index):
 	var player = $'../Player'
-	var score = get_node('/root/global').score
+	var score = get_node('/root/Game').score
 	var cost = Tree_Costs[index-1]
 	if not player.is_on_floor() or score < cost:
 		return
@@ -52,6 +52,6 @@ func _on_PlantTreeButton_pressed(index):
 	var flip = randi() % 2 == 0
 	var scale = 1
 	var data = { 'type_index': index-1, 'position': pos, 'flip': flip, 'scale': Vector2(scale, scale) }
-	get_node('/root/global').trees.append(data)
-	get_node('/root/global').score -= cost
+	get_node('/root/Game').trees.append(data)
+	get_node('/root/Game').score -= cost
 	load_tree(data, false)

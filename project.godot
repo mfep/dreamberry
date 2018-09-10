@@ -14,10 +14,6 @@ config/name="dreamberry_island"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-global="*res://scripts/global.gd"
-
 [display]
 
 window/size/resizable=false

@@ -1,5 +1,6 @@
 extends Node
 
+signal Score_Changed(new_score)
 signal Picked_Seeds_Changed(seeds)
 
 var main_scene = preload('res://scenes/MainScene.tscn')
@@ -7,6 +8,17 @@ var garden_scene = preload('res://scenes/GardenScene.tscn')
 
 var current_state_node = null
 var picked_seeds = [0, 0]
+var score setget set_score, get_score
+var trees = []
+
+var _score = 0
+
+func set_score(value):
+	_score = value
+	emit_signal('Score_Changed', _score)
+	
+func get_score():
+	return _score
 
 func reload_garden():
 	current_state_node = garden_scene.instance()
@@ -42,7 +54,7 @@ func _on_Seed_Picked(type):
 	$Timer.start()
 
 func _on_Timer_timeout():
-	get_node('/root/global').score = max(0, get_node('/root/global').score)
+	_score = max(0, _score)
 	current_state_node.queue_free()
 	reload_main() if current_state_node.name == 'GardenScene' else reload_garden()
 

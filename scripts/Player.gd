@@ -80,7 +80,3 @@ func _physics_process(delta):
 
 	var new_vel_y = (1-jump)*(velocity.y - gravity*delta) - jump*jump_velocity
 	velocity = move_and_slide(Vector2(new_vel_x, new_vel_y), Vector2(0, -1))
-
-func _input(event):
-	if (get_node('/root/global').DEBUG and event.is_action_pressed('ui_focus_next')):
-		position = start_pos

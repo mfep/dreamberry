@@ -101,7 +101,3 @@ func _ready():
 	else:
 		randomize()
 	generate()
-
-func _input(event):
-	if (get_node('/root/global').DEBUG and event.is_action_pressed('ui_focus_next')):
-		generate()
