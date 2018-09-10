@@ -60,3 +60,8 @@ func apply_seed_effects(index):
 			current_state_node.get_node('UI/BlurPostProc').visible = true
 		3: # saturated
 			current_state_node.get_node('UI/SaturationPostProc').visible = true
+		4: # former health TODO
+			print('WARNING: Seed4 not implemented!')
+		5: # former health TODO
+			print('WARNING: Seed5 not implemented!')
+		_: assert(false)
