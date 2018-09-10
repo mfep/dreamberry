@@ -182,6 +182,7 @@ Max_Speed = 250.0
 Jump_Height = 144.0
 Jump_Time = 0.3
 Shoot_Interval = 0.5
+Shooting_Enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="0"]
 

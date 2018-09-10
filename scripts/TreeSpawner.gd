@@ -42,12 +42,12 @@ func _on_TileMap_Map_generated(spawn_points, top_pos):
 	else:
 		generate_trees(spawn_points)
 
-func _on_PlantTreeButton_pressed(index):
+func plant_tree(index):
 	var player = $'../Player'
 	var score = get_node('/root/Game').score
 	var cost = Tree_Costs[index-1]
 	if not player.is_on_floor() or score < cost:
-		return
+		return false
 	var pos = player.position + Vector2(0, 32)
 	var flip = randi() % 2 == 0
 	var scale = 1
@@ -55,3 +55,4 @@ func _on_PlantTreeButton_pressed(index):
 	get_node('/root/Game').trees.append(data)
 	get_node('/root/Game').score -= cost
 	load_tree(data, false)
+	return true

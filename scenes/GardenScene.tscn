@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/TreeSpawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/trees/Tree1.tscn" type="PackedScene" id=2]
@@ -24,13 +24,10 @@
 [ext_resource path="res://scenes/trees/Seed1.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scripts/UI.gd" type="Script" id=23]
 [ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=24]
-[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=25]
+[ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=25]
 [ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=26]
 [ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=27]
-[ext_resource path="res://sprites/seeds/seed-scaled-2.png" type="Texture" id=28]
-[ext_resource path="res://sprites/seeds/seed-scaled-3.png" type="Texture" id=29]
-[ext_resource path="res://sprites/seeds/seed-scaled-4.png" type="Texture" id=30]
-[ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=31]
+[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=28]
 
 [sub_resource type="Gradient" id=1]
 
@@ -154,7 +151,6 @@ Generation_Seed = 1
 
 [node name="Player" type="KinematicBody2D" parent="." index="3"]
 
-editor/display_folded = true
 position = Vector2( 46.8026, -70.752 )
 input_pickable = false
 collision_layer = 1
@@ -170,6 +166,7 @@ Max_Speed = 250.0
 Jump_Height = 144.0
 Jump_Time = 0.3
 Shoot_Interval = 0.5
+Shooting_Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="0"]
 
@@ -213,6 +210,8 @@ animation = "idle"
 frame = 1
 playing = true
 
+[node name="SeedPos" type="Position2D" parent="Player" index="3"]
+
 [node name="Seed" parent="." index="4" instance=ExtResource( 22 )]
 
 position = Vector2( 422.384, -119.556 )
@@ -231,6 +230,7 @@ Double_Jump_Penalty = 0
 
 [node name="ScoreLabel" type="Label" parent="UI" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -270,12 +270,13 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="Container" type="VBoxContainer" parent="UI" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 174.0
-margin_bottom = 256.0
+margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -287,150 +288,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlantTreeButton" type="Button" parent="UI/Container" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 174.0
-margin_bottom = 38.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 25 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Plant Tree"
-icon = ExtResource( 26 )
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="PlantTreeButton2" type="Button" parent="UI/Container" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 42.0
-margin_right = 174.0
-margin_bottom = 80.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 25 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Plant Tree"
-icon = ExtResource( 27 )
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="PlantTreeButton3" type="Button" parent="UI/Container" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 84.0
-margin_right = 174.0
-margin_bottom = 122.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 25 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Plant Tree"
-icon = ExtResource( 28 )
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="PlantTreeButton4" type="Button" parent="UI/Container" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 126.0
-margin_right = 174.0
-margin_bottom = 164.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 25 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Plant Tree"
-icon = ExtResource( 29 )
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="PlantTreeButton5" type="Button" parent="UI/Container" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 168.0
-margin_right = 174.0
-margin_bottom = 206.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 25 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Plant Tree"
-icon = ExtResource( 30 )
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="PickedSeedsContainer" type="HBoxContainer" parent="UI/Container" index="5"]
+[node name="PickedSeedsContainer" type="HBoxContainer" parent="UI/Container" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 210.0
 margin_right = 174.0
-margin_bottom = 256.0
+margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -438,7 +304,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
 alignment = 1
-script = ExtResource( 31 )
+script = ExtResource( 25 )
 _sections_unfolded = [ "Size Flags" ]
 Seed_Textures = [ ExtResource( 26 ), ExtResource( 27 ) ]
 
@@ -449,7 +315,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 55.0
-margin_bottom = 46.0
+margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -467,7 +333,7 @@ anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 48.0
-margin_bottom = 39.0
+margin_bottom = 54.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -485,7 +351,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 59.0
 margin_right = 114.0
-margin_bottom = 46.0
+margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -503,7 +369,7 @@ anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 48.0
-margin_bottom = 39.0
+margin_bottom = 54.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -521,7 +387,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 118.0
 margin_right = 174.0
-margin_bottom = 46.0
+margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -529,7 +395,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 25 )
+custom_fonts/font = ExtResource( 28 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -539,18 +405,32 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Size Flags", "custom_fonts" ]
 
+[node name="Label" type="Label" parent="UI" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 41.0
+margin_right = 1024.0
+margin_bottom = 85.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 28 )
+text = "press 'space' to plant tree"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "custom_fonts" ]
+
 [connection signal="Map_generated" from="TileMap" to="TreeSpawner" method="_on_TileMap_Map_generated"]
 
 [connection signal="Double_Jumped" from="Player" to="UI" method="_on_Player_Double_Jumped"]
-
-[connection signal="pressed" from="UI/Container/PlantTreeButton" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 1 ]]
-
-[connection signal="pressed" from="UI/Container/PlantTreeButton2" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 2 ]]
-
-[connection signal="pressed" from="UI/Container/PlantTreeButton3" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 3 ]]
-
-[connection signal="pressed" from="UI/Container/PlantTreeButton4" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 4 ]]
-
-[connection signal="pressed" from="UI/Container/PlantTreeButton5" to="TreeSpawner" method="_on_PlantTreeButton_pressed" binds= [ 5 ]]
 
 

@@ -5,6 +5,7 @@ export(float) var Max_Speed
 export(float) var Jump_Height
 export(float) var Jump_Time
 export(float) var Shoot_Interval
+export(bool) var Shooting_Enabled = true
 
 signal Double_Jumped
 
@@ -56,7 +57,7 @@ func _ready():
 
 func _process(delta):
 	shoot_time -= delta
-	if Input.is_action_pressed('ui_accept') and shoot_time < 0:
+	if Shooting_Enabled and Input.is_action_pressed('ui_accept') and shoot_time < 0:
 		shoot_time = Shoot_Interval
 		var bullett_node = bullett_scene.instance()
 		bullett_node.position = position
