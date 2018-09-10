@@ -69,6 +69,7 @@ func _input(event):
 				if result:
 					trees.append(result)
 					current_state_node.get_node('Player/SeedPos').get_child(0).queue_free()
+					_score -= Tree_Costs[picked_seed_index - 1]
 					picked_seed_index = 0
 		update_label()
 
@@ -81,6 +82,7 @@ func _on_Seed_Picked(type):
 		picked_seeds.pop_back()
 		emit_signal('Picked_Seeds_Changed', picked_seeds)
 	else:
+		picked_seed_index = type
 		get_tree().paused = true
 		$Timer.start()
 
@@ -130,7 +132,7 @@ func get_status():
 func update_label():
 	var string
 	match get_status():
-		GoDream: string = 'press \'Space\' to dream'
-		HasSeedNotEnoughScore: string = 'press \'Space\' to drop seed: not enough score to plant)'
+		GoDream: string = 'pick berries. then press \'Space\' to dream'
+		HasSeedNotEnoughScore: string = 'press \'Space\' to drop berry. not enough score to plant)'
 		CanPlant: string = 'press \'Space\' to plant tree' # TODO tree names
 	current_state_node.get_node('UI/Label').text = string
