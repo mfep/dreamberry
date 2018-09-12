@@ -20,7 +20,7 @@ animations = [ {
 "speed": 7.0
 } ]
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="Area2D" index="0"]
 
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )
@@ -35,7 +35,8 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 Speed = 100.0
 Min_Change_Time = 1.0
 Max_Change_Time = 5.0
-Dps = 5.0
+Damage = 100.0
+Damage_Interval = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
@@ -50,5 +51,12 @@ frames = SubResource( 2 )
 animation = "default"
 frame = 1
 playing = true
+
+[node name="Timer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
 
 

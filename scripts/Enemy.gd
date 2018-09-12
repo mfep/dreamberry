@@ -3,10 +3,11 @@ extends Area2D
 export(float) var Speed
 export(float) var Min_Change_Time
 export(float) var Max_Change_Time
-export(float) var Dps
+export(float) var Damage
+export(float) var Damage_Interval
 
 signal Killed
-signal Player_Overlap(dps)
+signal Player_Overlap(damage)
 
 var explosion_scene = preload('res://scenes/Explosion.tscn')
 
@@ -28,14 +29,16 @@ func hit_by_bullet():
 func _ready():
 	connect('Killed', $'/root/Game', '_on_Enemy_Killed')
 	connect('Player_Overlap', $'/root/Game', '_on_Enemy_Player_Overlap')
+	$Timer.wait_time = Damage_Interval
 	direction_x = -1 if randi() % 2 else 1
 	new_next_change()
 
 func _physics_process(delta):
 	# collision with player
 	var player = $'../../Player'
-	if overlaps_body(player):
-		emit_signal('Player_Overlap', Dps*delta*60)
+	if $Timer.is_stopped() and overlaps_body(player):
+		$Timer.start()
+		emit_signal('Player_Overlap', Damage)
 
 	# update change
 	next_change -= delta
