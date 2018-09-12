@@ -16,6 +16,7 @@ export(int) var Double_Jump_Penalty
 
 var main_scene = preload('res://scenes/MainScene.tscn')
 var garden_scene = preload('res://scenes/GardenScene.tscn')
+var scored_label_scene = preload('res://scenes/ScoredLabel.tscn')
 
 var current_state_node = null
 var picked_seed_index = 0
@@ -25,10 +26,18 @@ var trees = []
 
 var _score = 0
 
+func mod_score(diff):
+	set_score(_score + diff)
+
 func set_score(value):
 	var prev_score = _score
 	_score = max(0, value)
+	var player_pos = current_state_node.get_node('Player').position
 	if prev_score != _score:
+		var score_node = scored_label_scene.instance()
+		score_node.position = player_pos
+		score_node.score = _score - prev_score
+		current_state_node.add_child(score_node)
 		emit_signal('Score_Changed', _score)
 
 func get_score():
@@ -83,15 +92,13 @@ func _input(event):
 				if result:
 					trees.append(result)
 					current_state_node.get_node('Player/SeedPos').get_child(0).queue_free()
-					_score -= Tree_Costs[picked_seed_index - 1]
+					mod_score(-Tree_Costs[picked_seed_index - 1])
 					picked_seed_index = 0
-					emit_signal('Score_Changed', _score)
 		update_label()
 
 func _on_Seed_Picked(type):
 	if type == 0:
-		_score += Pickup_Score
-		emit_signal('Score_Changed', _score)
+		mod_score(Pickup_Score)
 	elif current_state_node.name == 'GardenScene':
 		picked_seeds.push_front(type)
 		picked_seeds.pop_back()
@@ -103,20 +110,16 @@ func _on_Seed_Picked(type):
 		$Timer.start()
 
 func _on_Enemy_Killed():
-	_score += Enemy_Kill_Score
-	emit_signal('Score_Changed', _score)
+	mod_score(Enemy_Kill_Score)
 
 func _on_Enemy_Player_Overlap(damage):
-	_score -= damage
-	emit_signal('Score_Changed', _score)
+	mod_score(-damage)
 
 func _on_Player_Double_Jumped():
 	if current_state_node.name != 'GardenScene':
-		_score -= Double_Jump_Penalty
-		emit_signal('Score_Changed', _score)
+		mod_score(-Double_Jump_Penalty)
 
 func _on_Timer_timeout():
-	_score = max(0, _score)
 	current_state_node.queue_free()
 	reload_main() if current_state_node.name == 'GardenScene' else reload_garden()
 

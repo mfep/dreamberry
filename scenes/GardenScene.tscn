@@ -266,7 +266,7 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="SeedPos" type="Position2D" parent="Player" index="3"]
@@ -293,6 +293,7 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="UI" type="CanvasLayer" parent="." index="6"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
