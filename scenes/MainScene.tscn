@@ -63,14 +63,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=5]
 
 render_priority = 0
 shader = ExtResource( 22 )
 shader_param/amount = 2.0
 _sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=6]
 
 render_priority = 0
 shader = ExtResource( 24 )
@@ -152,7 +152,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 Map_Width = 32
-Map_Height = 20
+Map_Height = 60
 Platforms_Per_Level = 4
 Min_Offset = 3
 Max_Offset = 5
@@ -239,7 +239,7 @@ rect = Rect2( -100, -100, 200, 200 )
 [node name="SaturationPostProc" type="TextureRect" parent="UI" index="1"]
 
 visible = false
-material = SubResource( 9 )
+material = SubResource( 5 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -264,7 +264,7 @@ rect = Rect2( -100, -100, 200, 200 )
 [node name="BlurPostProc" type="TextureRect" parent="UI" index="3"]
 
 visible = false
-material = SubResource( 10 )
+material = SubResource( 6 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -322,8 +322,8 @@ anims/scored = SubResource( 8 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[connection signal="Map_generated" from="TileMap" to="TreeSpawner" method="_on_TileMap_Map_generated"]
-
 [connection signal="Map_generated" from="TileMap" to="Spawner" method="_on_TileMap_Map_generated"]
+
+[connection signal="Map_generated" from="TileMap" to="TreeSpawner" method="_on_TileMap_Map_generated"]
 
 

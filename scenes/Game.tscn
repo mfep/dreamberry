@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
-[ext_resource path="res://scenes/trees/Seed1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/trees/Seed2.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
-Seed_Scenes = [ ExtResource( 2 ), ExtResource( 3 ) ]
 Tree_Costs = [ 1000, 1500 ]
 Enemy_Kill_Score = 100
 Pickup_Score = 50
@@ -17,7 +14,7 @@ Double_Jump_Penalty = 150
 
 pause_mode = 2
 process_mode = 1
-wait_time = 1.0
+wait_time = 5.0
 one_shot = true
 autostart = false
 _sections_unfolded = [ "Pause" ]

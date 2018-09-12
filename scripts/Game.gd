@@ -89,6 +89,7 @@ func _on_Seed_Picked(type):
 	else:
 		picked_seed_index = type
 		get_tree().paused = true
+		$Timer.wait_time = 1
 		$Timer.start()
 
 func _on_Enemy_Killed():
@@ -110,7 +111,14 @@ func _on_Timer_timeout():
 	reload_main() if current_state_node.name == 'GardenScene' else reload_garden()
 
 func start_Timer():
+	var tween = current_state_node.get_node('Modulate/Tween')
+	tween.interpolate_property(current_state_node.get_node('Modulate'), 'color', Color(1, 1, 1), Color(0, 0, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	current_state_node.get_node('UI/AnimationPlayer').play('start')
+	update_seed_description_label(current_state_node.get_node('UI/Container/Explanation1'), picked_seeds[0])
+	update_seed_description_label(current_state_node.get_node('UI/Container/Explanation2'), picked_seeds[1])
 	get_tree().paused = true
+	$Timer.wait_time = 5
 	$Timer.start()
 
 func apply_seed_effects(mask):
@@ -134,3 +142,12 @@ func update_label():
 		HasSeedNotEnoughScore: string = 'press \'Space\' to drop berry. not enough score to plant)'
 		CanPlant: string = 'press \'Space\' to plant tree' # TODO tree names
 	current_state_node.get_node('UI/Label').text = string
+
+func update_seed_description_label(label, seed_idx):
+	var text;
+	match seed_idx:
+		0: text = ''
+		1: text = 'quick movement'
+		2: text = 'blurred vision'
+		_: assert(false)
+	label.text = text

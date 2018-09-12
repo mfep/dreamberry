@@ -9,7 +9,10 @@ var Trees = [
 
 var Seeds = [
 	preload('res://scenes/trees/Seed1.tscn'),
-	preload('res://scenes/trees/Seed2.tscn')]
+	preload('res://scenes/trees/Seed2.tscn'),
+	preload('res://scenes/trees/Seed3.tscn'),
+	preload('res://scenes/trees/Seed4.tscn'),
+	preload('res://scenes/trees/Seed5.tscn')]
 
 func get_random_tree():
 	return Trees[randi() % Trees.size()]
