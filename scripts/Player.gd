@@ -6,6 +6,7 @@ export(float) var Jump_Height
 export(float) var Jump_Time
 export(float) var Shoot_Interval
 export(bool) var Shooting_Enabled = true
+export(bool) var Infinite_Jump = false
 
 signal Double_Jumped
 
@@ -27,7 +28,9 @@ func get_input():
 	if Input.is_action_pressed('ui_left'): x += -1
 	if Input.is_action_pressed('ui_right'): x += 1
 	if Input.is_action_just_pressed('ui_up'):
-		if is_on_floor():
+		if Infinite_Jump:
+			jump = 1
+		elif is_on_floor():
 			jump = 1
 			jumped = false
 		elif not jumped:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scripts/TreeSpawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/trees/Tree1.tscn" type="PackedScene" id=2]
@@ -22,12 +22,16 @@
 [ext_resource path="res://sprites/player_atlas/player_jump6.tres" type="Texture" id=20]
 [ext_resource path="res://scenes/trees/Seed1.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scripts/UI.gd" type="Script" id=22]
-[ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=23]
+[ext_resource path="res://fonts/Diavlo_MEDIUM_II_37.otf" type="DynamicFontData" id=23]
 [ext_resource path="res://scripts/PickedSeedsContainer.gd" type="Script" id=24]
 [ext_resource path="res://sprites/seeds/seed-scaled-0.png" type="Texture" id=25]
 [ext_resource path="res://sprites/seeds/seed-scaled-1.png" type="Texture" id=26]
-[ext_resource path="res://SeedStyleBox.tres" type="StyleBox" id=27]
-[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=28]
+[ext_resource path="res://sprites/seeds/seed-scaled-2.png" type="Texture" id=27]
+[ext_resource path="res://sprites/seeds/seed-scaled-3.png" type="Texture" id=28]
+[ext_resource path="res://sprites/seeds/seed-scaled-4.png" type="Texture" id=29]
+[ext_resource path="res://SeedStyleBox.tres" type="StyleBox" id=30]
+[ext_resource path="res://fonts/UIFont.tres" type="DynamicFont" id=31]
+[ext_resource path="res://sprites/arrow.png" type="Texture" id=32]
 
 [sub_resource type="Gradient" id=1]
 
@@ -120,7 +124,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -120, 120 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -310, 120 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("PickedSeedsContainer/PanelContainer2:rect_position")
@@ -132,7 +136,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.2, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 57, 0 ), Vector2( -120, 200 ) ]
+"values": [ Vector2( 57, 0 ), Vector2( -310, 200 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Container:modulate")
@@ -147,7 +151,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="GardenScene" type="Node" index="0"]
+[node name="GardenScene" type="Node"]
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
@@ -262,7 +266,7 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="SeedPos" type="Position2D" parent="Player" index="3"]
@@ -323,7 +327,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants" ]
+_sections_unfolded = [ "custom_fonts" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/ScoreLabel" index="0"]
 
@@ -338,7 +342,6 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="PickedSeedsContainer" type="HBoxContainer" parent="UI" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -356,7 +359,7 @@ size_flags_vertical = 3
 alignment = 1
 script = ExtResource( 24 )
 _sections_unfolded = [ "Anchor", "Margin", "Size Flags" ]
-Seed_Textures = [ ExtResource( 25 ), ExtResource( 26 ) ]
+Seed_Textures = [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ]
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/PickedSeedsContainer" index="0"]
 
@@ -372,7 +375,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 27 )
+custom_styles/panel = ExtResource( 30 )
 _sections_unfolded = [ "Rect", "custom_styles" ]
 __meta__ = {
 "_edit_group_": true
@@ -412,7 +415,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 27 )
+custom_styles/panel = ExtResource( 30 )
 _sections_unfolded = [ "Rect", "custom_styles" ]
 __meta__ = {
 "_edit_group_": true
@@ -445,15 +448,15 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 41.0
 margin_right = 1024.0
-margin_bottom = 85.0
+margin_bottom = 73.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 28 )
-text = "press 'space' to plant tree"
+custom_fonts/font = ExtResource( 31 )
+text = "pick berries. then press \\'Space\\' to dream"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -484,9 +487,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 428.0
+margin_left = 232.0
 margin_top = 210.0
-margin_right = 955.0
+margin_right = 765.0
 margin_bottom = 254.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -494,7 +497,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 28 )
+custom_fonts/font = ExtResource( 31 )
 text = "press 'space' to plant tree"
 valign = 1
 percent_visible = 1.0
@@ -508,9 +511,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 428.0
+margin_left = 231.0
 margin_top = 289.0
-margin_right = 955.0
+margin_right = 766.0
 margin_bottom = 333.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -518,13 +521,58 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 28 )
+custom_fonts/font = ExtResource( 31 )
 text = "press 'space' to plant tree"
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Visibility", "custom_fonts" ]
+
+[node name="Explanation3" type="Label" parent="UI/Container" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 676.0
+margin_top = 249.0
+margin_right = 983.0
+margin_bottom = 293.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 31 )
+text = "press 'space' to plant tree"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Visibility", "custom_fonts" ]
+
+[node name="TextureRect" type="TextureRect" parent="UI/Container" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 581.0
+margin_top = 258.0
+margin_right = 694.0
+margin_bottom = 298.0
+rect_scale = Vector2( 0.5, 1 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 32 )
+stretch_mode = 0
+_sections_unfolded = [ "Rect" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI" index="4"]
 

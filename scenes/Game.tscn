@@ -5,7 +5,8 @@
 [node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
-Tree_Costs = [ 1000, 1500 ]
+Tree_Costs = [ 1000, 1500, 1000, 1500, 1500 ]
+Initial_Seeds = null
 Enemy_Kill_Score = 100
 Pickup_Score = 50
 Double_Jump_Penalty = 150

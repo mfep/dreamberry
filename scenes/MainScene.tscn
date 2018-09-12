@@ -25,7 +25,7 @@
 [ext_resource path="res://sprites/white.png" type="Texture" id=23]
 [ext_resource path="res://shaders/blur.shader" type="Shader" id=24]
 [ext_resource path="res://scripts/BlurPostProc.gd" type="Script" id=25]
-[ext_resource path="res://fonts/grec.ttf" type="DynamicFontData" id=26]
+[ext_resource path="res://fonts/Diavlo_MEDIUM_II_37.otf" type="DynamicFontData" id=26]
 
 [sub_resource type="Gradient" id=1]
 
@@ -104,7 +104,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1.6, 1.6 ), Vector2( 1, 1 ) ]
 }
 
-[node name="MainScene" type="Node" index="0"]
+[node name="MainScene" type="Node"]
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
@@ -219,7 +219,6 @@ __meta__ = {
 
 frames = SubResource( 4 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="." index="5"]
@@ -309,7 +308,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants" ]
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/ScoreLabel" index="0"]
 
